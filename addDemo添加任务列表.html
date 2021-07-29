@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="layui-v2.5.6/layui/layui.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="layui-v2.5.6/layui/css/layui.css"></link>
+    <style>
+      h2{
+        text-align:center;
+        color: #60a4d1;
+      }
+      #shu{
+        width: 300px;
+        height: 25px;
+        border:1px solid rgb(70, 181, 209);
+        background-color: #f7f6f6;
+
+      }
+      
+      table {
+        margin:0 auto;
+        width: 500px;
+        height: 90px;
+        
+      }
+    
+
+      #box{
+        border:2px dashed rgb(0, 0, 0);
+        width: 650px;
+        height: 600px;
+        margin: auto;
+        background-color: #f1d4e5;
+      }
+      
+      #box1{
+       text-align: center;
+      }
+    
+
+    </style>
+</head>
+<body> 
+    <h1 style="text-align:center;">快来挣金币吧！</h1>  <br>
+    <div id="box">
+   <h2> <b>任 务 列 表</b></h2>
+   <hr style="border: rgb(134, 218, 230); "></hr>
+   <div id="box1">
+    <!-- 输入文本框 -->
+    <span>
+        <input id="shu" type="text"></input>
+        <button id="Add" type="button" class="layui-btn layui-btn-normal">add</button>
+    </span>
+    </div>
+    <table cellspacing="2">
+        <thead>
+        <tr>
+          <th>任务</th>
+          <th>时间</th>
+          <th>选择</th>
+        </tr>  
+    </thead>
+    <tbody id="tian">
+        <tr></tr>
+        <hr style="border:rgb(134, 218, 230);"></hr>
+    </tbody> 
+    </table>
+</div>
+
+<script>
+    $("#Add").click(function() {
+        //获取输入的内容
+        var context=$("#shu").val();
+        //获取时间
+        var date=new Date();
+        //年
+        var year=date.getFullYear();
+        //月
+        var month=date.getMonth()+1;
+        //日
+        var da=date.getDate();
+        //时
+        var hour=date.getHours();
+        //分
+        var minutes=date.getMinutes();
+        //秒
+        var seconds=date.getSeconds();
+        //星期
+        var day=date.getDay();
+
+        //拼接日期时间
+        var datetime=year+"年"+month+"月"+da+"日"+hour+":"+minutes+":"+seconds+"  "+"星期 "+day;
+
+        //创建一行tr
+    		var tr = 
+	    		$("<tr>"+
+	            "<td>"+context+"</td>"+
+	            "<td>"+datetime+"</td>"+
+	            "<td>"+
+                "<button type='button' class='layui-btn layui-btn-normal' onclick='Done(this)'>done</button>  "+
+                "<button type='button' class='layui-btn layui-btn-normal' onclick='del(this)'>delete</button> "+
+                "</td>"+
+	          "</tr>");
+    		//将此行追加到tbody下
+    		$("#tian").append(tr);
+
+    })
+    //删除
+    function del(btn){
+        var shan=$(btn).parent().parent();
+        shan.remove()
+    }
+    // 过期线   out
+    function Done(btn){
+        var tr=$(btn).parent().parent();
+        $(tr).css({'color':'red','text-decoration':'line-through'});
+    }
+
+</script>
+</body>
+</html>
